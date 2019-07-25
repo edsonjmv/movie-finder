@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'mf-input-search',
@@ -6,10 +6,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./input-search.component.scss']
 })
 export class InputSearchComponent implements OnInit {
+  @Input()
+  placeholderText: string;
+
+  @Input()
+  buttonText: string;
+
+  inputText: string = '';
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  submit() {
+    if (!this.inputText) return;
+    console.log(this.inputText);
   }
 
 }

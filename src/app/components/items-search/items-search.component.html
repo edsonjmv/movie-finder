@@ -1,4 +1,7 @@
-<mf-input-search></mf-input-search>
+<mf-input-search
+  [placeholderText]="'Search a movie...'"
+  [buttonText]="'Search'">
+</mf-input-search>
 
 <mf-items-list
   *ngIf="movies && movies.length > 0"

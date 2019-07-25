@@ -1,2 +1,12 @@
-<input type="text" placeholder="Search a movie...">
-<button>Search</button>
+<input 
+  type="text"
+  placeholder="{{ placeholderText }}"
+  [(ngModel)]="inputText"
+  (keyup.enter)="submit()"
+  >
+
+<button
+  [disabled]="!inputText"
+  (click)="submit()">
+  {{ buttonText }}
+</button>
