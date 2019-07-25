@@ -1,0 +1,16 @@
+:host {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  background-color: #1a1a1a;
+  color: #ABACAB;
+
+  h3 {
+    text-transform: uppercase;
+    font-size: 14px;
+  }
+}
