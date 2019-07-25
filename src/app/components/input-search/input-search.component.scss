@@ -1,11 +1,15 @@
 :host {
   display: flex;
   justify-content: space-between;
-  align-items: stretch;
 
   border: 1px solid #bbb;
   border-radius: 10px;
   overflow: hidden;
+
+  justify-self: center;
+  width: 100%;
+  min-width: 200px;
+  max-width: 600px;
 
   input {
     display: flex;

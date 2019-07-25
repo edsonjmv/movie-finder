@@ -1,0 +1,29 @@
+:host {
+  display: none;
+  background-color: #666;
+  padding: 20px;
+  color: #ccc;
+
+  align-self: stretch;
+  justify-self: stretch;
+
+  // grid-area: sidebar;
+  grid-row: 2 / 3;
+  grid-column: 1 / 2;
+
+  h4 {
+    margin-bottom: 20px;
+  }
+
+  ul {
+    list-style: none;
+
+    li {
+      margin: 5px 0;
+    }
+  }
+
+  @media screen and (min-width: 800px) {
+    display: block;
+  }
+}

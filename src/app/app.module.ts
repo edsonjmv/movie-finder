@@ -10,6 +10,7 @@ import { ItemsSearchComponent } from './components/items-search/items-search.com
 import { InputSearchComponent } from './components/input-search/input-search.component';
 import { ItemsListComponent } from './components/items-list/items-list.component';
 import { ItemCardComponent } from './components/item-card/item-card.component';
+import { SidebarListComponent } from './components/sidebar-list/sidebar-list.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ItemCardComponent } from './components/item-card/item-card.component';
     ItemsSearchComponent,
     InputSearchComponent,
     ItemsListComponent,
-    ItemCardComponent
+    ItemCardComponent,
+    SidebarListComponent
   ],
   imports: [
     BrowserModule,

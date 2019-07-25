@@ -5,4 +5,11 @@
   grid-template-areas: 
     "header"
     "main";
+
+  @media screen and (min-width: 800px) {
+    grid-template-columns: 200px 1fr;
+    grid-template-areas: 
+      "header header"
+      "sidebar main";
+  }
 }
