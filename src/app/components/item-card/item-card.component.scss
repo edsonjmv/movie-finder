@@ -1,6 +1,23 @@
 :host {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: "image content";
+
   width: 280px;
   height: 160px;
   border: 2px solid #ddd;
   border-radius: 10px;
+  overflow: hidden;
+
+  .item-background {
+    grid-area: image;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .item-content {
+    grid-area: content;
+    padding: 20px;
+  }
 }
