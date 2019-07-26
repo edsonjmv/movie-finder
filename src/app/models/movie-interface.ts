@@ -4,3 +4,11 @@ export interface Movie {
   rating: number;
   year: string;
 }
+/* 
+export interface Movie {
+  id: number;
+  title: string;
+  vote_average: number;
+  overview: string;
+  release_date: string;
+} */
