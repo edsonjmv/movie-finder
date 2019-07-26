@@ -1,9 +1,11 @@
+@import "../../../assets/scss/main.scss";
+
 :host {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #1a1a1a;
-  color: #ABACAB;
+  background-color: $dark-gray;
+  color: $light-gray;
 
   h3 {
     text-transform: uppercase;

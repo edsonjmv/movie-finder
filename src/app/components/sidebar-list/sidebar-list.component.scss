@@ -1,8 +1,10 @@
+@import "../../../assets/scss/main.scss";
+
 :host {
   display: none;
-  background-color: #666;
+  background-color: $medium-gray;
   padding: 20px;
-  color: #ccc;
+  color: $light-gray;
   align-self: stretch;
   justify-self: stretch;
 

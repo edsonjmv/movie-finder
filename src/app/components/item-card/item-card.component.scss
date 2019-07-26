@@ -1,3 +1,5 @@
+@import "../../../assets/scss/main.scss";
+
 :host {
   display: grid;
   grid-template-columns: 100px 1fr;
@@ -5,7 +7,7 @@
   grid-template-areas: "image content";
   width: 280px;
   height: 160px;
-  border: 2px solid #ddd;
+  border: 2px solid $medium-gray;
   border-radius: 10px;
   overflow: hidden;
 
