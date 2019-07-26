@@ -7,12 +7,16 @@ import { Movie } from 'src/app/models/movie-interface';
 @Component({
   selector: 'mf-main-view',
   template: `
-    <header-bar></header-bar>
+    <header-bar
+      [title]="title"
+    ></header-bar>
 
     <sidebar-list></sidebar-list>
     
     <items-finder
+      [placeholderText]="'Search a movie...'"
       [items]="items"
+      (submitSearch)="searchMovies($event)"
     ></items-finder>
   `,
   styleUrls: ['./main-view.component.scss']
@@ -21,6 +25,8 @@ export class MainViewComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   items: Item[] = [];
+
+  title: string = 'Movie Finder';
 
   constructor(private apiService: ApiService) { }
 
@@ -36,6 +42,10 @@ export class MainViewComponent implements OnInit, OnDestroy {
     }, error => {
       console.log(error);
     })
+  }
+
+  searchMovies(inputText: string) {
+    console.log(inputText);
   }
 
   createItemsList(movies: Movie[]): Item[] {

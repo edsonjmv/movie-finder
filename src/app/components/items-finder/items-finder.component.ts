@@ -1,12 +1,13 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Item } from '../../models/item';
 
 @Component({
   selector: 'items-finder',
   template: `
     <input-search
-      [placeholderText]="'Search a movie...'"
-      [buttonText]="'Search'">
+      [placeholderText]="placeholderText"
+      [buttonText]="'Search'"
+      (submitSearch)="submitSearch.emit($event)">
     </input-search>
 
     <items-list
@@ -18,4 +19,10 @@ import { Item } from '../../models/item';
 export class ItemsFinderComponent {
   @Input()
   items: Item[];
+
+  @Input()
+  placeholderText: string;
+
+  @Output()
+  submitSearch: EventEmitter<any> = new EventEmitter();
 }
