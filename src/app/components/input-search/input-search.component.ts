@@ -2,7 +2,20 @@ import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'mf-input-search',
-  templateUrl: './input-search.component.html',
+  template: `
+    <input 
+      type="text"
+      placeholder="{{ placeholderText }}"
+      [(ngModel)]="inputText"
+      (keyup.enter)="submit()"
+      >
+
+    <button
+      [disabled]="!inputText"
+      (click)="submit()">
+      {{ buttonText }}
+    </button>
+  `,
   styleUrls: ['./input-search.component.scss']
 })
 export class InputSearchComponent implements OnInit {

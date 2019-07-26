@@ -1,26 +1,22 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Item } from '../../models/item';
 
 @Component({
   selector: 'mf-item-card',
-  templateUrl: './item-card.component.html',
+  template: `
+    <div
+      class="item-background"
+      [ngStyle]="{'background-image': 'url(' + item?.imageUrl + ')'}"
+    ></div>
+    <section class="item-content">
+      <h3>{{ item?.title }}</h3>
+      <h6>{{ item?.score }}</h6>
+      <p>{{ item?.text }}</p>
+    </section>
+  `,
   styleUrls: ['./item-card.component.scss']
 })
-export class ItemCardComponent implements OnInit {
+export class ItemCardComponent {
   @Input()
-  imageUrl: string;
-
-  @Input()
-  title: string;
-
-  @Input()
-  subtitle: string;
-
-  @Input()
-  text: string;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  item: Item;
 }

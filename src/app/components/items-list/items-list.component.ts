@@ -1,17 +1,17 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Item } from '../../models/item';
 
 @Component({
   selector: 'mf-items-list',
-  templateUrl: './items-list.component.html',
+  template: `
+    <mf-item-card 
+      *ngFor="let item of items"
+      [item]="item">
+    </mf-item-card>
+  `,
   styleUrls: ['./items-list.component.scss']
 })
-export class ItemsListComponent implements OnInit {
+export class ItemsListComponent {
   @Input()
-  items;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  items: Item[];
 }

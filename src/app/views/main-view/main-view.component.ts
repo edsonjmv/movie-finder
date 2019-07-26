@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'mf-main-view',
-  templateUrl: './main-view.component.html',
+  template: `
+    <mf-header-bar></mf-header-bar>
+
+    <mf-sidebar-list></mf-sidebar-list>
+    
+    <mf-items-search></mf-items-search>
+  `,
   styleUrls: ['./main-view.component.scss']
 })
-export class MainViewComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}
+export class MainViewComponent { }

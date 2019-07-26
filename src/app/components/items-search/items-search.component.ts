@@ -1,15 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
-import { Movie } from 'src/app/interfaces/movie-interface';
+import { Item } from '../../models/item';
 
 @Component({
   selector: 'mf-items-search',
-  templateUrl: './items-search.component.html',
+  template: `
+    <mf-input-search
+      [placeholderText]="'Search a movie...'"
+      [buttonText]="'Search'">
+    </mf-input-search>
+
+    <mf-items-list
+      *ngIf="items && items.length > 0"
+      [items]="items"
+    ></mf-items-list>
+  `,
   styleUrls: ['./items-search.component.scss']
 })
 export class ItemsSearchComponent implements OnInit {
-
-  movies: Movie[] = [];
+  items: Item[] = [];
 
   constructor(private apiService: ApiService) { }
 
@@ -20,8 +29,6 @@ export class ItemsSearchComponent implements OnInit {
   getMovies() {
     this.apiService.getMovies().subscribe(res => {
       console.log(res);
-      this.movies = res['movies'] ? [ ...res['movies'] ] : [];
-      console.log(this.movies);
     }, error => {
       console.log(error);
     })

@@ -3,6 +3,7 @@
   grid-template-rows: 50px 1fr;
   grid-template-columns: 1fr;
   grid-gap: 20px;
+  align-self: start;
 
   // grid-area: main;
   grid-column: 1 / 2;
