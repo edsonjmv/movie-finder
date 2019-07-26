@@ -1,20 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'sidebar-list',
   template: `
-    <h4>Last searches:</h4>
+    <h4>{{ title }}</h4>
     <ul>
-      <li>item 1</li>
-      <li>item 2</li>
-      <li>item 3</li>
-      <li>item 4</li>
-      <li>item 5</li>
-      <li>item 6</li>
-      <li>item 7</li>
-      <li>item 8</li>
+      <li *ngFor="let item of items"> {{ item }} </li>
     </ul>
   `,
   styleUrls: ['./sidebar-list.component.scss']
 })
-export class SidebarListComponent { }
+export class SidebarListComponent {
+  @Input()
+  title: string;
+
+  @Input()
+  items: string[];
+}

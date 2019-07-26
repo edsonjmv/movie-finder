@@ -5,3 +5,7 @@ export interface Movie {
   title: string;
   vote_average: number;
 }
+
+export interface ApiResponse {
+  results: Movie[];
+}
