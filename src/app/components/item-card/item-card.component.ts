@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Item } from '../../models/item';
 
 @Component({
-  selector: 'mf-item-card',
+  selector: 'item-card',
   template: `
     <div
       class="item-background"

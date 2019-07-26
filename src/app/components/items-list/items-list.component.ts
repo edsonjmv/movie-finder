@@ -2,12 +2,12 @@ import { Component, Input } from '@angular/core';
 import { Item } from '../../models/item';
 
 @Component({
-  selector: 'mf-items-list',
+  selector: 'items-list',
   template: `
-    <mf-item-card 
+    <item-card 
       *ngFor="let item of items"
       [item]="item">
-    </mf-item-card>
+    </item-card>
   `,
   styleUrls: ['./items-list.component.scss']
 })

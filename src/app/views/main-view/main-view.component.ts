@@ -3,9 +3,9 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'mf-main-view',
   template: `
-    <mf-header-bar></mf-header-bar>
+    <header-bar></header-bar>
 
-    <mf-sidebar-list></mf-sidebar-list>
+    <sidebar-list></sidebar-list>
     
     <mf-items-search></mf-items-search>
   `,

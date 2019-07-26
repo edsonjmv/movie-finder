@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'mf-input-search',
+  selector: 'input-search',
   template: `
     <input 
       type="text"

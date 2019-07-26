@@ -5,6 +5,18 @@
   grid-template-areas: 
     "header"
     "main";
+  
+  header-bar {
+    grid-area: header;
+  }
+
+  sidebar-list {
+    grid-area: sidebar;
+  }
+
+  mf-items-search {
+    grid-area: main;
+  }
 
   @media screen and (min-width: 800px) {
     grid-template-columns: 200px 1fr;

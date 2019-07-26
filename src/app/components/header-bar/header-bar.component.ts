@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'mf-header-bar',
+  selector: 'header-bar',
   template: `
     <header>
       <h3>Movie finder</h3>

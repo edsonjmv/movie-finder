@@ -5,15 +5,15 @@ import { Item } from '../../models/item';
 @Component({
   selector: 'mf-items-search',
   template: `
-    <mf-input-search
+    <input-search
       [placeholderText]="'Search a movie...'"
       [buttonText]="'Search'">
-    </mf-input-search>
+    </input-search>
 
-    <mf-items-list
+    <items-list
       *ngIf="items && items.length > 0"
       [items]="items"
-    ></mf-items-list>
+    ></items-list>
   `,
   styleUrls: ['./items-search.component.scss']
 })

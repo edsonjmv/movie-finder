@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'mf-sidebar-list',
+  selector: 'sidebar-list',
   template: `
     <h4>Last searches:</h4>
     <ul>
