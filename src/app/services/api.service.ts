@@ -11,12 +11,13 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  getMovies() {
-    return this.http.get('../assets/mock.json');
+  getPopularMovies() {
+    const url = `${this.BASE_URL}/movie/popular?api_key=${this.API_KEY}`;
+    return this.http.get(url);
   }
 
-  getPopularMovies() {
-    const url = `${this.BASE_URL}/popular?api_key=${this.API_KEY}`;
+  getMoviesSearch(query: string) {
+    const url = `${this.BASE_URL}/search/movie?api_key=${this.API_KEY}&query=${query}`;
     return this.http.get(url);
   }
 }

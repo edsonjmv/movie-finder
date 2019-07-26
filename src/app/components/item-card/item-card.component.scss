@@ -1,24 +1,10 @@
 @import "../../../assets/scss/main.scss";
 
 :host {
-  display: grid;
-  grid-template-columns: 100px 1fr;
-  grid-template-rows: 1fr;
-  grid-template-areas: "image content";
+  padding: 20px;
   width: 280px;
-  height: 160px;
   border: 2px solid $medium-gray;
   border-radius: 10px;
   overflow: hidden;
-
-  .item-background {
-    grid-area: image;
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
-
-  .item-content {
-    grid-area: content;
-    padding: 20px;
-  }
+  text-overflow: ellipsis;
 }

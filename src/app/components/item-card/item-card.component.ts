@@ -4,15 +4,10 @@ import { Item } from '../../models/item';
 @Component({
   selector: 'item-card',
   template: `
-    <div
-      class="item-background"
-      [ngStyle]="{'background-image': 'url(' + item?.imageUrl + ')'}"
-    ></div>
-    <section class="item-content">
-      <h3>{{ item?.title }}</h3>
-      <h6>{{ item?.score }}</h6>
-      <p>{{ item?.text }}</p>
-    </section>
+    <h3>{{ item?.title }}</h3>
+    <h6>{{ item?.subtitle }}</h6>
+    <p>{{ item?.text }}</p>
+    <span>{{ item?.score }}</span>
   `,
   styleUrls: ['./item-card.component.scss']
 })

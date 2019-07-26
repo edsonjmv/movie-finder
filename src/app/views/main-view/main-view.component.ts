@@ -22,7 +22,7 @@ import { Movie } from 'src/app/models/movie-interface';
   styleUrls: ['./main-view.component.scss']
 })
 export class MainViewComponent implements OnInit, OnDestroy {
-  subscription: Subscription;
+  subscriptions: Subscription[] = [];
 
   items: Item[] = [];
 
@@ -31,36 +31,51 @@ export class MainViewComponent implements OnInit, OnDestroy {
   constructor(private apiService: ApiService) { }
 
   ngOnInit() {
-    this.getMovies();
+    this.getPopularMovies();
   }
 
-  getMovies() {
-    this.subscription = this.apiService.getMovies().subscribe(res => {
-      if (res['movies']) {
-        this.items = this.createItemsList(res['movies']);
+  getPopularMovies() {
+    const subscription = this.apiService.getPopularMovies().subscribe(res => {
+      if (res['results']) {
+        this.items = this.createItemsList(res['results']);
       }
     }, error => {
       console.log(error);
     })
+
+    this.addSubscription(subscription);
   }
 
   searchMovies(inputText: string) {
-    console.log(inputText);
+    this.items = [];
+    const subscription = this.apiService.getMoviesSearch(inputText).subscribe(res => {
+      if (res['results']) {
+        this.items = this.createItemsList(res['results']);
+      }
+    }, error => {
+      console.log(error);
+    })
+
+    this.addSubscription(subscription);
   }
 
   createItemsList(movies: Movie[]): Item[] {
     const items: Item[] = movies.map((movie: Movie) => {
-      const { image_url, rating, year, name } = movie;
-      const item = new Item(image_url, rating, year, name);
+      const { overview, release_date, title, vote_average } = movie;
+      const item = new Item(vote_average, release_date, overview, title);
       return item;
     })
 
     return [...items];
   }
 
+  addSubscription(subscription: Subscription) {
+    this.subscriptions.push(subscription);
+  }
+
   ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+    this.subscriptions.map(subscription => {
+      subscription.unsubscribe();
+    })
   }
 }
