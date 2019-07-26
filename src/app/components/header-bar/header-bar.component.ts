@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'header-bar',
@@ -9,11 +9,4 @@ import { Component, OnInit } from '@angular/core';
   `,
   styleUrls: ['./header-bar.component.scss']
 })
-export class HeaderBarComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}
+export class HeaderBarComponent { }

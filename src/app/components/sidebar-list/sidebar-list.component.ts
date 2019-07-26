@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'sidebar-list',
@@ -17,11 +17,4 @@ import { Component, OnInit } from '@angular/core';
   `,
   styleUrls: ['./sidebar-list.component.scss']
 })
-export class SidebarListComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}
+export class SidebarListComponent { }

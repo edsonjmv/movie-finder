@@ -1,22 +1,12 @@
 :host {
-  // grid-area: header;
-  grid-column: 1 / 2;
-  grid-row: 1 / 2;
-
   display: flex;
   justify-content: center;
   align-items: center;
-  
   background-color: #1a1a1a;
   color: #ABACAB;
 
   h3 {
     text-transform: uppercase;
     font-size: 14px;
-  }
-
-  @media screen and (min-width: 800px) {
-    grid-column: 1 / 3;
-    grid-row: 1 / 2;
   }
 }

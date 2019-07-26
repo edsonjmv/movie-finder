@@ -7,8 +7,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { MainViewComponent } from './views/main-view/main-view.component';
+
 import { HeaderBarComponent } from './components/header-bar/header-bar.component';
-import { ItemsSearchComponent } from './components/items-search/items-search.component';
+import { ItemsFinderComponent } from './components/items-finder/items-finder.component';
 import { InputSearchComponent } from './components/input-search/input-search.component';
 import { ItemsListComponent } from './components/items-list/items-list.component';
 import { ItemCardComponent } from './components/item-card/item-card.component';
@@ -19,7 +20,7 @@ import { SidebarListComponent } from './components/sidebar-list/sidebar-list.com
     AppComponent,
     MainViewComponent,
     HeaderBarComponent,
-    ItemsSearchComponent,
+    ItemsFinderComponent,
     InputSearchComponent,
     ItemsListComponent,
     ItemCardComponent,

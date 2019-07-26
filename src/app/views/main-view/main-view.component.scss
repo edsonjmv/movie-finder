@@ -1,6 +1,7 @@
 :host {
+  min-height: 100vh;
   display: grid;
-  grid-template-rows: 70px minmax(100vh, 1fr);
+  grid-template-rows: 70px 1fr;
   grid-template-columns: 1fr;
   grid-template-areas: 
     "header"
@@ -14,11 +15,11 @@
     grid-area: sidebar;
   }
 
-  mf-items-search {
+  items-finder {
     grid-area: main;
   }
 
-  @media screen and (min-width: 800px) {
+  @media screen and (min-width: 600px) {
     grid-template-columns: 200px 1fr;
     grid-template-areas: 
       "header header"

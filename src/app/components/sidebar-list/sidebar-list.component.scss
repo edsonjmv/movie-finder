@@ -3,13 +3,8 @@
   background-color: #666;
   padding: 20px;
   color: #ccc;
-
   align-self: stretch;
   justify-self: stretch;
-
-  // grid-area: sidebar;
-  grid-row: 2 / 3;
-  grid-column: 1 / 2;
 
   h4 {
     margin-bottom: 20px;
@@ -23,7 +18,7 @@
     }
   }
 
-  @media screen and (min-width: 800px) {
+  @media screen and (min-width: 600px) {
     display: block;
   }
 }
