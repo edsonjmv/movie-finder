@@ -31,7 +31,7 @@ export class InputSearchComponent {
   submitSearch: EventEmitter<any> = new EventEmitter();
 
   submit() {
-    if (!this.inputText) return;
+    if (!this.inputText.trim()) return;
     this.submitSearch.emit(this.inputText);
     this.inputText = '';
   }
