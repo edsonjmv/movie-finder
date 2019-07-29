@@ -11,7 +11,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
       >
 
     <button
-      [disabled]="!inputText"
+      [disabled]="!inputText.trim()"
       (click)="submit()">
       {{ buttonText }}
     </button>
