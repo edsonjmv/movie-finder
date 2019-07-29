@@ -5,20 +5,32 @@ import { Subject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class StoreService {
-  private searchList: string[] = [];
+  items: string[] = [];
 
-  private listSubject: Subject<string[]>;
+  itemsSubject: Subject<string[]>;
+  itemClickSubject: Subject<string>;
 
   constructor() {
-    this.listSubject = new Subject<string[]>();
+    this.itemsSubject = new Subject<string[]>();
+    this.itemClickSubject = new Subject<string>();
   }
 
-  public getSearchList(): Observable<string[]> {
-    return this.listSubject.asObservable();
+  getItems(): Observable<string[]> {
+    return this.itemsSubject.asObservable();
   }
 
-  public addSearch(search: string) {
-    this.searchList.unshift(search);
-    this.listSubject.next(this.searchList);
+  clickItem(): Observable<string> {
+    return this.itemClickSubject.asObservable();
+  }
+
+  addItem(item: string) {
+    if (!this.items.includes(item)) {
+      this.items.unshift(item);
+    }
+    this.itemsSubject.next(this.items);
+  }
+
+  emitClickItem(item: string) {
+    this.itemClickSubject.next(item);
   }
 }

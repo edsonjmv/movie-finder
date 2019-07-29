@@ -2,9 +2,9 @@
 
 :host {
   display: none;
-  background-color: $medium-gray;
+  background-color: $light-gray;
   padding: 20px;
-  color: $light-gray;
+  color: $dark-gray;
   align-self: stretch;
   justify-self: stretch;
 
@@ -16,6 +16,7 @@
     list-style: none;
 
     li {
+      cursor: pointer;
       margin: 10px 0;
     }
   }

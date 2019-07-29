@@ -34,7 +34,13 @@ export class MainViewComponent implements OnInit, OnDestroy {
   constructor(private apiService: ApiService, private store: StoreService) { }
 
   ngOnInit() {
+    this.subscribeEvents();
     this.getPopularMovies();
+  }
+
+  subscribeEvents() {
+    const subscription = this.store.clickItem().subscribe(search => this.searchMovies(search));
+    this.addSubscription(subscription);
   }
 
   getPopularMovies() {
@@ -54,7 +60,7 @@ export class MainViewComponent implements OnInit, OnDestroy {
     const subscription = this.apiService.getMoviesSearch(inputText).subscribe((res: ApiResponse) => {
       const { results } = res;
       if (results && results.length > 0) {
-        this.store.addSearch(inputText);
+        this.store.addItem(inputText);
         this.items = this.createItemsList(results);
       }
     }, error => {
