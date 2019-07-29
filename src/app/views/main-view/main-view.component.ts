@@ -19,6 +19,7 @@ import { Item } from 'src/app/models/item';
     <items-finder
       [placeholderText]="'Search a movie...'"
       [items]="items"
+      [loading]="loadingSearch"
       (submitSearch)="searchMovies($event)"
     ></items-finder>
   `,
@@ -28,6 +29,8 @@ export class MainViewComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
 
   items: Item[] = [];
+
+  loadingSearch: boolean = true;
 
   title: string = 'Movie Finder';
 
@@ -39,25 +42,31 @@ export class MainViewComponent implements OnInit, OnDestroy {
   }
 
   subscribeEvents() {
-    const subscription = this.store.clickItem().subscribe(search => this.searchMovies(search));
+    const subscription: Subscription = this.store.clickItem().subscribe(search => this.searchMovies(search));
     this.addSubscription(subscription);
   }
 
   getPopularMovies() {
-    const subscription = this.apiService.getPopularMovies().subscribe((res: ApiResponse) => {
+    const subscription: Subscription = this.apiService.getPopularMovies().subscribe((res: ApiResponse) => {
+      this.loadingSearch = false;
       const { results } = res;
       if (results) {
         this.items = this.createItemsList(results);
       }
     }, error => {
       console.log(error);
+      this.loadingSearch = false;
     })
+
     this.addSubscription(subscription);
   }
 
   searchMovies(inputText: string) {
     this.items = [];
-    const subscription = this.apiService.getMoviesSearch(inputText).subscribe((res: ApiResponse) => {
+    this.loadingSearch = true;
+
+    const subscription: Subscription = this.apiService.getMoviesSearch(inputText).subscribe((res: ApiResponse) => {
+      this.loadingSearch = false;
       const { results } = res;
       if (results && results.length > 0) {
         this.store.addItem(inputText);
@@ -65,6 +74,7 @@ export class MainViewComponent implements OnInit, OnDestroy {
       }
     }, error => {
       console.log(error);
+      this.loadingSearch = false;
     })
 
     this.addSubscription(subscription);

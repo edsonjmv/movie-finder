@@ -32,6 +32,8 @@
     &:disabled {
       color: $medium-gray;
       background-color: $light-gray;
+
+      cursor: default;
     }
   }
 }
