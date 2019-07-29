@@ -33,6 +33,7 @@ export class InputSearchComponent {
   submit() {
     if (!this.inputText) return;
     this.submitSearch.emit(this.inputText);
+    this.inputText = '';
   }
 
 }
