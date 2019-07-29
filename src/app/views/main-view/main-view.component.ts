@@ -14,7 +14,6 @@ import { Item } from 'src/app/models/item';
 
     <sidebar-list
       [title]="'Last searches:'"
-      [items]="searchList"
     ></sidebar-list>
     
     <items-finder
@@ -28,7 +27,6 @@ import { Item } from 'src/app/models/item';
 export class MainViewComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
 
-  searchList: string[] = [];
   items: Item[] = [];
 
   title: string = 'Movie Finder';
@@ -37,7 +35,6 @@ export class MainViewComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getPopularMovies();
-    this.store.getSearchList().subscribe(newList => this.searchList = newList);
   }
 
   getPopularMovies() {
@@ -49,7 +46,6 @@ export class MainViewComponent implements OnInit, OnDestroy {
     }, error => {
       console.log(error);
     })
-
     this.addSubscription(subscription);
   }
 

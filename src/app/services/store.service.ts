@@ -5,8 +5,9 @@ import { Subject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class StoreService {
-  private listSubject: Subject<string[]>;
   private searchList: string[] = [];
+
+  private listSubject: Subject<string[]>;
 
   constructor() {
     this.listSubject = new Subject<string[]>();
