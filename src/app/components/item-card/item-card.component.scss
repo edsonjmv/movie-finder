@@ -2,7 +2,8 @@
 
 :host {
   padding: 20px;
-  border: 3px solid $light-gray;
+  background-color: $light-gray;
+  color: $dark-gray;
   border-radius: 10px;
   overflow: hidden;
   text-overflow: ellipsis;
