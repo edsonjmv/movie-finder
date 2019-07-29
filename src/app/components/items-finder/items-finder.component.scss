@@ -5,9 +5,9 @@
   grid-gap: 20px;
   align-self: start;
   padding: 10px;
-  text-align: center;
 
-  p {
+  .empty-message {
+    text-align: center;
     padding: 20px;
   }
 }

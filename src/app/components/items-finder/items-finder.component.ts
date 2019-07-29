@@ -10,7 +10,7 @@ import { Item } from '../../models/item';
       (submitSearch)="submitSearch.emit($event)">
     </input-search>
 
-    <p *ngIf="!items || items.length === 0">
+    <p *ngIf="!items || items.length === 0" class="empty-message">
       <ng-container *ngIf="loading; else noResults">
         Loading...
       </ng-container>
