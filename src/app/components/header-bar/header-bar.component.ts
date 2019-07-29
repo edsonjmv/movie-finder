@@ -4,7 +4,7 @@ import { Component, Input } from '@angular/core';
   selector: 'header-bar',
   template: `
     <header>
-      <h3>{{ title }}</h3>
+      <h1>{{ title }}</h1>
     </header>
   `,
   styleUrls: ['./header-bar.component.scss']
