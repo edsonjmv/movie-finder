@@ -7,4 +7,28 @@
   border-radius: 10px;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  display: grid;
+  grid-template-columns: 1fr 30px;
+  grid-template-rows: repeat(2, auto) 1fr;
+  grid-gap: 10px;
+
+  grid-template-areas: 
+    "title score"
+    "subtitle subtitle"
+    "text text";
+
+  h3 {
+    grid-area: title;
+  }
+  h6 {
+    grid-area: subtitle;
+  }
+  p {
+    grid-area: text;
+  }
+  span {
+    grid-area: score;
+    font-size: 22px;
+  }
 }
