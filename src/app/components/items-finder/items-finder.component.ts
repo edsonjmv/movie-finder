@@ -10,14 +10,14 @@ import { Item } from '../../models/item';
       (submitSearch)="submitSearch.emit($event)">
     </input-search>
 
-    <items-list
-      [items]="items">
-    </items-list>
-
     <p class="empty-message" *ngIf="!items || items.length === 0">
       <ng-container *ngIf="loading; else noResults">Loading...</ng-container>
       <ng-template #noResults>No results found.</ng-template>
     </p>
+
+    <items-list
+      [items]="items">
+    </items-list>
   `,
   styleUrls: ['./items-finder.component.scss']
 })
