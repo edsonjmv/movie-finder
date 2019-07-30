@@ -17,7 +17,7 @@ import { Item } from 'src/app/models/item';
     ></sidebar-list>
     
     <items-finder
-      [placeholderText]="'Search a movie...'"
+      [placeholderText]="'Search movies...'"
       [items]="items"
       [loading]="loadingSearch"
       (submitSearch)="getMovies($event)"
@@ -36,7 +36,7 @@ export class MainViewComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscribeEvents();
-    this.getMovies('batman');
+    this.getMovies('wall street');
   }
 
   subscribeEvents() {
@@ -81,7 +81,7 @@ export class MainViewComponent implements OnInit, OnDestroy {
   formatText(primaryText: string, secondaryText: string): string {
     let formatted: string = '';
     if (primaryText && secondaryText) {
-      formatted = `${primaryText.toUpperCase()} | ${secondaryText}`;
+      formatted = `${primaryText} | ${secondaryText}`;
     }
     return formatted;
   }
