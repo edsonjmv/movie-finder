@@ -3,6 +3,6 @@
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   grid-gap: 40px;
   align-self: start;
-  justify-items: center;
+  justify-items: stretch;
   padding: 10px;
 }
