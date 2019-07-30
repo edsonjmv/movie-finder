@@ -17,6 +17,7 @@
       cursor: pointer;
       margin: 10px 0;
 
+      &.active-item,
       &:hover {
         color: $green;
       }

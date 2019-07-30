@@ -7,15 +7,22 @@ import { Subscription } from 'rxjs';
   template: `
     <h4>{{ title }}</h4>
     <ul>
-      <li *ngFor="let item of items" (click)="clickItem(item)"> {{ item }} </li>
+      <li
+        *ngFor="let item of items" 
+        (click)="clickItem(item)"
+        [ngClass]="{ 'active-item': item === activeItem }">
+        {{ item }}
+      </li>
     </ul>
   `,
   styleUrls: ['./sidebar-list.component.scss']
 })
 export class SidebarListComponent implements OnInit, OnDestroy {
-  subscription: Subscription;
+  subscriptions: Subscription[] = [];
 
   items: string[] = [];
+
+  activeItem: string = '';
 
   @Input()
   title: string;
@@ -23,16 +30,27 @@ export class SidebarListComponent implements OnInit, OnDestroy {
   constructor(private store: StoreService) { }
 
   ngOnInit() {
-    this.subscription = this.store.getItems().subscribe(newList => this.items = newList);
+    this.subscribeEvents();
+  }
+
+  subscribeEvents() {
+    const itemsSubsc: Subscription = this.store.getItems().subscribe(items => this.items = items);
+    const actualSubsc: Subscription = this.store.getActiveItem().subscribe(item => this.activeItem = item);
+    this.addSubscription(itemsSubsc);
+    this.addSubscription(actualSubsc);
   }
 
   clickItem(item: string) {
     this.store.emitClickItem(item);
   }
 
+  addSubscription(subscription: Subscription) {
+    this.subscriptions.push(subscription);
+  }
+
   ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+    this.subscriptions.map(subscription => {
+      subscription.unsubscribe();
+    })
   }
 }

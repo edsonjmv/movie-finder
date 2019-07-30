@@ -62,6 +62,7 @@ export class MainViewComponent implements OnInit, OnDestroy {
   searchMovies(inputText: string) {
     this.items = [];
     this.loadingSearch = true;
+    this.store.activateItem('');
 
     const subscription: Subscription = this.apiService.getMoviesSearch(inputText).subscribe((res: ApiResponse) => {
       this.loadingSearch = false;
