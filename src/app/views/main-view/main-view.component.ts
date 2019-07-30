@@ -68,7 +68,7 @@ export class MainViewComponent implements OnInit, OnDestroy {
     const items: Item[] = movies.map((movie: Movie) => {
       const { Poster, Year, Title, Type } = movie;
       const item = new Item(
-        Poster,
+        this.checkImage(Poster),
         this.formatText(Type, Year),
         Title
       );
@@ -84,6 +84,11 @@ export class MainViewComponent implements OnInit, OnDestroy {
       formatted = `${primaryText.toUpperCase()} | ${secondaryText}`;
     }
     return formatted;
+  }
+
+  checkImage(url: string) {
+    let placeholder: string = 'https://popcornusa.s3.amazonaws.com/placeholder-movieimage.png';
+    return !url || url === 'N/A' ? placeholder : url;
   }
 
   addSubscription(subscription: Subscription) {
