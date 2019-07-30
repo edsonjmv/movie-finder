@@ -9,7 +9,7 @@ import { Item } from 'src/app/models/item';
   selector: 'mf-main-view',
   template: `
     <header-bar
-      [title]="title"
+      [title]="'Movie Finder'"
     ></header-bar>
 
     <sidebar-list
@@ -31,8 +31,6 @@ export class MainViewComponent implements OnInit, OnDestroy {
   items: Item[] = [];
 
   loadingSearch: boolean = true;
-
-  title: string = 'Movie Finder';
 
   constructor(private apiService: ApiService, private store: StoreService) { }
 
