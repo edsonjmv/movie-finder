@@ -20,4 +20,9 @@ export class ApiService {
     const url = `${this.BASE_URL}/search/movie${this.API_KEY}&query=${query}`;
     return this.http.get(url);
   }
+
+  getMovies(query: string) {
+    const url = `${environment.OMDB_URL}&s=${query}&plot=full`;
+    return this.http.get(url);
+  }
 }

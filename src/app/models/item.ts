@@ -1,8 +1,7 @@
 export class Item {
   constructor(
-    public score: number,
+    public image: string,
     public subtitle: string,
-    public text: string,
     public title: string
   ) { };
 }

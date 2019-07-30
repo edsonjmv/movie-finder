@@ -4,10 +4,9 @@ import { Item } from '../../models/item';
 @Component({
   selector: 'item-card',
   template: `
-    <h3>{{ item?.title }}</h3>
-    <h6>{{ item?.subtitle }}</h6>
-    <p>{{ item?.text }}</p>
-    <span>{{ item?.score }}</span>
+    <img [src]="item?.image" alt="Image of {{ item?.title }}">
+    <h2>{{ item?.title }}</h2>
+    <h4>{{ item?.subtitle }}</h4>
   `,
   styleUrls: ['./item-card.component.scss']
 })

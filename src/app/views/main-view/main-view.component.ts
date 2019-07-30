@@ -20,7 +20,7 @@ import { Item } from 'src/app/models/item';
       [placeholderText]="'Search a movie...'"
       [items]="items"
       [loading]="loadingSearch"
-      (submitSearch)="searchMovies($event)"
+      (submitSearch)="getMovies($event)"
     ></items-finder>
   `,
   styleUrls: ['./main-view.component.scss']
@@ -36,40 +36,25 @@ export class MainViewComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscribeEvents();
-    this.getPopularMovies();
+    this.getMovies('batman');
   }
 
   subscribeEvents() {
-    const subscription: Subscription = this.store.clickItem().subscribe(search => this.searchMovies(search));
+    const subscription: Subscription = this.store.clickItem().subscribe(search => this.getMovies(search));
     this.addSubscription(subscription);
   }
 
-  getPopularMovies() {
-    const subscription: Subscription = this.apiService.getPopularMovies().subscribe((res: ApiResponse) => {
-      this.loadingSearch = false;
-      const { results } = res;
-      if (results) {
-        this.items = this.createItemsList(results);
-      }
-    }, error => {
-      console.log(error);
-      this.loadingSearch = false;
-    })
-
-    this.addSubscription(subscription);
-  }
-
-  searchMovies(inputText: string) {
+  getMovies(inputText: string) {
     this.items = [];
     this.loadingSearch = true;
     this.store.activateItem('');
 
-    const subscription: Subscription = this.apiService.getMoviesSearch(inputText).subscribe((res: ApiResponse) => {
+    const subscription: Subscription = this.apiService.getMovies(inputText).subscribe((res: ApiResponse) => {
       this.loadingSearch = false;
-      const { results } = res;
-      if (results && results.length > 0) {
+      const { Search } = res;
+      if (Search && Search.length > 0) {
         this.store.addItem(inputText);
-        this.items = this.createItemsList(results);
+        this.items = this.createItemsList(Search);
       }
     }, error => {
       console.log(error);
@@ -81,18 +66,22 @@ export class MainViewComponent implements OnInit, OnDestroy {
 
   createItemsList(movies: Movie[]): Item[] {
     const items: Item[] = movies.map((movie: Movie) => {
-      const { overview, release_date, title, vote_average } = movie;
-      const item = new Item(vote_average, this.formatSubtitle(release_date), overview, title);
+      const { Poster, Year, Title, Type } = movie;
+      const item = new Item(
+        Poster,
+        this.formatText(Type, Year),
+        Title
+      );
       return item;
     })
 
     return [...items];
   }
 
-  formatSubtitle(release_date: string): string {
+  formatText(primaryText: string, secondaryText: string): string {
     let formatted: string = '';
-    if (release_date) {
-      formatted = `Release date: ${release_date.slice(0, 4)}`;
+    if (primaryText && secondaryText) {
+      formatted = `${primaryText.toUpperCase()} | ${secondaryText}`;
     }
     return formatted;
   }

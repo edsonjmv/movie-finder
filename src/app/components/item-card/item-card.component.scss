@@ -1,34 +1,40 @@
 @import "../../../assets/scss/main.scss";
 
 :host {
-  padding: 20px;
   background-color: $light-gray;
   color: $dark-gray;
   border-radius: 10px;
   overflow: hidden;
+  height: 280px;
 
   display: grid;
-  grid-template-columns: 1fr 30px;
-  grid-template-rows: repeat(2, auto) 1fr;
+  grid-template-columns: 160px 1fr;
+  grid-template-rows: min-content 1fr;
   grid-gap: 10px;
 
   grid-template-areas: 
-    "title score"
-    "subtitle subtitle"
-    "text text";
+    "image title"
+    "image subtitle";
 
-  h3 {
-    grid-area: title;
+  img {
+    grid-area: image;
+    display: block;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
   }
-  h6 {
+  h2 {
+    grid-area: title;
+    margin: 10px 20px;
+  }
+  h4 {
     grid-area: subtitle;
+    font-size: 10px;
+    margin: 10px 20px;
   }
   p {
     grid-area: text;
     text-align: justify;
-  }
-  span {
-    grid-area: score;
-    font-size: 22px;
   }
 }
