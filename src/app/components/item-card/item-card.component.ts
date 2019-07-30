@@ -5,8 +5,10 @@ import { Item } from '../../models/item';
   selector: 'item-card',
   template: `
     <img [src]="item?.image" alt="Image of {{ item?.title }}">
-    <h2>{{ item?.title }}</h2>
-    <h4>{{ item?.subtitle }}</h4>
+    <section class="description">
+      <h3>{{ item?.title }}</h3>
+      <h6>{{ item?.subtitle }}</h6>
+    </section>
   `,
   styleUrls: ['./item-card.component.scss']
 })
