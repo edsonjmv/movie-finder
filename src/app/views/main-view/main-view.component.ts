@@ -81,11 +81,19 @@ export class MainViewComponent implements OnInit, OnDestroy {
   createItemsList(movies: Movie[]): Item[] {
     const items: Item[] = movies.map((movie: Movie) => {
       const { overview, release_date, title, vote_average } = movie;
-      const item = new Item(vote_average, release_date, overview, title);
+      const item = new Item(vote_average, this.formatSubtitle(release_date), overview, title);
       return item;
     })
 
     return [...items];
+  }
+
+  formatSubtitle(release_date: string): string {
+    let formatted: string = '';
+    if (release_date) {
+      formatted = `Release date: ${release_date.slice(0, 4)}`;
+    }
+    return formatted;
   }
 
   addSubscription(subscription: Subscription) {
