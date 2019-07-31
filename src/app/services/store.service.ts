@@ -7,41 +7,35 @@ import { Subject, Observable } from 'rxjs';
 export class StoreService {
   items: string[] = [];
 
-  itemsSubject: Subject<string[]>;
-  itemClickSubject: Subject<string>;
-  activeItemSubject: Subject<string>;
-
-  constructor() {
-    this.itemsSubject = new Subject<string[]>();
-    this.itemClickSubject = new Subject<string>();
-    this.activeItemSubject = new Subject<string>();
-  }
+  items$ = new Subject<string[]>();
+  itemClick$ = new Subject<string>();
+  activeItem$ = new Subject<string>();
 
   getItems(): Observable<string[]> {
-    return this.itemsSubject.asObservable();
+    return this.items$.asObservable();
   }
 
   clickItem(): Observable<string> {
-    return this.itemClickSubject.asObservable();
+    return this.itemClick$.asObservable();
   }
 
   getActiveItem(): Observable<string> {
-    return this.activeItemSubject.asObservable();
+    return this.activeItem$.asObservable();
   }
 
   addItem(item: string) {
     if (!this.items.includes(item)) {
       this.items.unshift(item);
     }
-    this.itemsSubject.next(this.items);
+    this.items$.next(this.items);
     this.activateItem(item);
   }
 
   emitClickItem(item: string) {
-    this.itemClickSubject.next(item);
+    this.itemClick$.next(item);
   }
 
   activateItem(item: string) {
-    this.activeItemSubject.next(item);
+    this.activeItem$.next(item);
   }
 }

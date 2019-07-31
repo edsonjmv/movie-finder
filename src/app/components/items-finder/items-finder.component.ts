@@ -32,5 +32,5 @@ export class ItemsFinderComponent {
   loading: boolean;
 
   @Output()
-  submitSearch: EventEmitter<any> = new EventEmitter();
+  submitSearch: EventEmitter<string> = new EventEmitter();
 }

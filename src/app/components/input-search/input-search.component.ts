@@ -28,7 +28,7 @@ export class InputSearchComponent {
   buttonText: string;
 
   @Output()
-  submitSearch: EventEmitter<any> = new EventEmitter();
+  submitSearch: EventEmitter<string> = new EventEmitter();
 
   submit() {
     if (!this.inputText.trim()) return;

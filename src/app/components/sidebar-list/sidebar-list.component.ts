@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { StoreService } from 'src/app/services/store.service';
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'sidebar-list',
@@ -18,7 +19,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./sidebar-list.component.scss']
 })
 export class SidebarListComponent implements OnInit, OnDestroy {
-  subscriptions: Subscription[] = [];
+  unsubscribe$ = new Subject<void>();
+
   items: string[] = [];
 
   activeItem: string = '';
@@ -33,23 +35,21 @@ export class SidebarListComponent implements OnInit, OnDestroy {
   }
 
   subscribeEvents() {
-    const itemsSubsc: Subscription = this.store.getItems().subscribe(items => this.items = items);
-    const actualSubsc: Subscription = this.store.getActiveItem().subscribe(item => this.activeItem = item);
-    this.addSubscription(itemsSubsc);
-    this.addSubscription(actualSubsc);
+    this.store.getItems()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(items => this.items = items);
+
+    this.store.getActiveItem()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(item => this.activeItem = item);
   }
 
   clickItem(item: string) {
     this.store.emitClickItem(item);
   }
 
-  addSubscription(subscription: Subscription) {
-    this.subscriptions.push(subscription);
-  }
-
   ngOnDestroy() {
-    this.subscriptions.map(subscription => {
-      subscription.unsubscribe();
-    })
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { StoreService } from 'src/app/services/store.service';
 import { ApiService } from 'src/app/services/api.service';
 import { HelperService } from 'src/app/services/helper.service';
@@ -27,7 +28,8 @@ import { Item } from 'src/app/models/item';
   styleUrls: ['./main-view.component.scss']
 })
 export class MainViewComponent implements OnInit, OnDestroy {
-  subscriptions: Subscription[] = [];
+  unsubscribe$ = new Subject<void>();
+
   items: Item[] = [];
 
   loadingSearch: boolean = true;
@@ -44,8 +46,9 @@ export class MainViewComponent implements OnInit, OnDestroy {
   }
 
   subscribeEvents() {
-    const subscription: Subscription = this.store.clickItem().subscribe(search => this.getMovies(search));
-    this.addSubscription(subscription);
+    this.store.clickItem()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(search => this.getMovies(search));
   }
 
   getMovies(inputText: string) {
@@ -53,19 +56,23 @@ export class MainViewComponent implements OnInit, OnDestroy {
     this.loadingSearch = true;
     this.store.activateItem('');
 
-    const subscription: Subscription = this.apiService.getMovies(inputText).subscribe((res: ApiResponse) => {
-      this.loadingSearch = false;
-      const { Search } = res;
-      if (Search && Search.length > 0) {
-        this.store.addItem(inputText);
-        this.items = this.createItemsList(Search);
-      }
-    }, error => {
-      console.log(error);
-      this.loadingSearch = false;
-    })
+    this.apiService.getMovies(inputText)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((res: ApiResponse) => {
+        this.loadingSearch = false;
+        this.handleResponse(inputText, res);
+      }, error => {
+        console.log(error);
+        this.loadingSearch = false;
+      })
+  }
 
-    this.addSubscription(subscription);
+  handleResponse(inputText: string, res: ApiResponse) {
+    const { Search } = res;
+    if (Search && Search.length > 0) {
+      this.store.addItem(inputText);
+      this.items = this.createItemsList(Search);
+    }
   }
 
   createItemsList(movies: Movie[]): Item[] {
@@ -84,13 +91,8 @@ export class MainViewComponent implements OnInit, OnDestroy {
     return [...items];
   }
 
-  addSubscription(subscription: Subscription) {
-    this.subscriptions.push(subscription);
-  }
-
   ngOnDestroy() {
-    this.subscriptions.map(subscription => {
-      subscription.unsubscribe();
-    })
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }
