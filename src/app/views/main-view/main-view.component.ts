@@ -59,10 +59,10 @@ export class MainViewComponent implements OnInit, OnDestroy {
     this.apiService.getMovies(inputText)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((res: ApiResponse) => {
-        this.loadingSearch = false;
         this.handleResponse(inputText, res);
       }, error => {
         console.log(error);
+      }).add(() => {
         this.loadingSearch = false;
       })
   }
