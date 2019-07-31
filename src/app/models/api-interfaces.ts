@@ -1,11 +1,13 @@
 export interface Movie {
-  id: number;
-  overview: string;
-  release_date: string;
-  title: string;
-  vote_average: number;
+  imdbID: string;
+  Poster: string;
+  Title: string;
+  Type: string;
+  Year: string;
 }
 
 export interface ApiResponse {
-  results: Movie[];
+  Response: string;
+  Search: Movie[];
+  totalResults: string;
 }

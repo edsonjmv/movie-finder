@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { StoreService } from 'src/app/services/store.service';
 import { ApiService } from 'src/app/services/api.service';
+import { HelperService } from 'src/app/services/helper.service';
 import { Movie, ApiResponse } from 'src/app/models/api-interfaces';
 import { Item } from 'src/app/models/item';
 
@@ -17,59 +18,47 @@ import { Item } from 'src/app/models/item';
     ></sidebar-list>
     
     <items-finder
-      [placeholderText]="'Search a movie...'"
+      [placeholderText]="'Search movies...'"
       [items]="items"
       [loading]="loadingSearch"
-      (submitSearch)="searchMovies($event)"
+      (submitSearch)="getMovies($event)"
     ></items-finder>
   `,
   styleUrls: ['./main-view.component.scss']
 })
 export class MainViewComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
-
   items: Item[] = [];
 
   loadingSearch: boolean = true;
 
-  constructor(private apiService: ApiService, private store: StoreService) { }
+  constructor(
+    private apiService: ApiService,
+    private store: StoreService,
+    private helper: HelperService
+  ) { }
 
   ngOnInit() {
     this.subscribeEvents();
-    this.getPopularMovies();
+    this.getMovies('wall street');
   }
 
   subscribeEvents() {
-    const subscription: Subscription = this.store.clickItem().subscribe(search => this.searchMovies(search));
+    const subscription: Subscription = this.store.clickItem().subscribe(search => this.getMovies(search));
     this.addSubscription(subscription);
   }
 
-  getPopularMovies() {
-    const subscription: Subscription = this.apiService.getPopularMovies().subscribe((res: ApiResponse) => {
-      this.loadingSearch = false;
-      const { results } = res;
-      if (results) {
-        this.items = this.createItemsList(results);
-      }
-    }, error => {
-      console.log(error);
-      this.loadingSearch = false;
-    })
-
-    this.addSubscription(subscription);
-  }
-
-  searchMovies(inputText: string) {
+  getMovies(inputText: string) {
     this.items = [];
     this.loadingSearch = true;
     this.store.activateItem('');
 
-    const subscription: Subscription = this.apiService.getMoviesSearch(inputText).subscribe((res: ApiResponse) => {
+    const subscription: Subscription = this.apiService.getMovies(inputText).subscribe((res: ApiResponse) => {
       this.loadingSearch = false;
-      const { results } = res;
-      if (results && results.length > 0) {
+      const { Search } = res;
+      if (Search && Search.length > 0) {
         this.store.addItem(inputText);
-        this.items = this.createItemsList(results);
+        this.items = this.createItemsList(Search);
       }
     }, error => {
       console.log(error);
@@ -81,20 +70,18 @@ export class MainViewComponent implements OnInit, OnDestroy {
 
   createItemsList(movies: Movie[]): Item[] {
     const items: Item[] = movies.map((movie: Movie) => {
-      const { overview, release_date, title, vote_average } = movie;
-      const item = new Item(vote_average, this.formatSubtitle(release_date), overview, title);
+      const { Poster, Year, Title, Type } = movie;
+
+      const item = new Item(
+        this.helper.checkImage(Poster),
+        this.helper.formatText(Type, Year),
+        Title
+      );
+
       return item;
     })
 
     return [...items];
-  }
-
-  formatSubtitle(release_date: string): string {
-    let formatted: string = '';
-    if (release_date) {
-      formatted = `Release date: ${release_date.slice(0, 4)}`;
-    }
-    return formatted;
   }
 
   addSubscription(subscription: Subscription) {
