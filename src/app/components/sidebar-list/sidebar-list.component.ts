@@ -19,7 +19,6 @@ import { Subscription } from 'rxjs';
 })
 export class SidebarListComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
-
   items: string[] = [];
 
   activeItem: string = '';

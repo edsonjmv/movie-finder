@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { StoreService } from 'src/app/services/store.service';
 import { ApiService } from 'src/app/services/api.service';
+import { HelperService } from 'src/app/services/helper.service';
 import { Movie, ApiResponse } from 'src/app/models/api-interfaces';
 import { Item } from 'src/app/models/item';
 
@@ -27,12 +28,15 @@ import { Item } from 'src/app/models/item';
 })
 export class MainViewComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
-
   items: Item[] = [];
 
   loadingSearch: boolean = true;
 
-  constructor(private apiService: ApiService, private store: StoreService) { }
+  constructor(
+    private apiService: ApiService,
+    private store: StoreService,
+    private helper: HelperService
+  ) { }
 
   ngOnInit() {
     this.subscribeEvents();
@@ -67,28 +71,17 @@ export class MainViewComponent implements OnInit, OnDestroy {
   createItemsList(movies: Movie[]): Item[] {
     const items: Item[] = movies.map((movie: Movie) => {
       const { Poster, Year, Title, Type } = movie;
+
       const item = new Item(
-        this.checkImage(Poster),
-        this.formatText(Type, Year),
+        this.helper.checkImage(Poster),
+        this.helper.formatText(Type, Year),
         Title
       );
+
       return item;
     })
 
     return [...items];
-  }
-
-  formatText(primaryText: string, secondaryText: string): string {
-    let formatted: string = '';
-    if (primaryText && secondaryText) {
-      formatted = `${primaryText} | ${secondaryText}`;
-    }
-    return formatted;
-  }
-
-  checkImage(url: string) {
-    let placeholder: string = 'https://popcornusa.s3.amazonaws.com/placeholder-movieimage.png';
-    return !url || url === 'N/A' ? placeholder : url;
   }
 
   addSubscription(subscription: Subscription) {
