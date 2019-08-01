@@ -6,18 +6,6 @@
   grid-template-areas: 
     "header"
     "main";
-  
-  header-bar {
-    grid-area: header;
-  }
-
-  sidebar-list {
-    grid-area: sidebar;
-  }
-
-  items-finder {
-    grid-area: main;
-  }
 
   @media screen and (min-width: 600px) {
     grid-template-columns: 200px 1fr;

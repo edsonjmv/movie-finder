@@ -1,4 +1,5 @@
 :host {
+  grid-area: main;
   display: grid;
   grid-template-rows: 50px 1fr;
   grid-template-columns: 1fr;

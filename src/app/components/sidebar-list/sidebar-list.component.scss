@@ -1,6 +1,7 @@
 @import "../../../assets/scss/main.scss";
 
 :host {
+  grid-area: sidebar;
   display: none;
   background-color: $light-gray;
   color: $dark-gray;
