@@ -4,7 +4,7 @@ import { takeUntil } from 'rxjs/operators';
 import { StoreService } from 'src/app/services/store.service';
 import { ApiService } from 'src/app/services/api.service';
 import { HelperService } from 'src/app/services/helper.service';
-import { Movie, ApiResponse } from 'src/app/models/api-interfaces';
+import { ApiResponse } from 'src/app/models/api-interfaces';
 import { Item } from 'src/app/models/item';
 
 @Component({
@@ -71,24 +71,8 @@ export class MainViewComponent implements OnInit, OnDestroy {
     const { Search } = res;
     if (Search && Search.length > 0) {
       this.store.addItem(inputText);
-      this.items = this.createItemsList(Search);
+      this.items = this.helper.generateItemsFromMovies(Search);
     }
-  }
-
-  createItemsList(movies: Movie[]): Item[] {
-    const items: Item[] = movies.map((movie: Movie) => {
-      const { Poster, Year, Title, Type } = movie;
-
-      const item = new Item(
-        this.helper.checkImage(Poster),
-        this.helper.formatText(Type, Year),
-        Title
-      );
-
-      return item;
-    })
-
-    return [...items];
   }
 
   ngOnDestroy() {
